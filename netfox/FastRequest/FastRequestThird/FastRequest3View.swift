@@ -18,13 +18,20 @@ public struct FastRequest3View: View {
     private let model: AuthorizationOfferModel?
     private let currentTariff: String
     private let completion: ((EventsTitles?) -> Void)
+    private let rScreen: Int?
     
-    public init(showNextScreen: Binding<Bool>, isDisabled: Binding<Bool>, model: AuthorizationOfferModel?, currentTariff: String, completion: @escaping ((EventsTitles?) -> Void)) {
+    public init(showNextScreen: Binding<Bool>,
+                isDisabled: Binding<Bool>,
+                model: AuthorizationOfferModel?,
+                currentTariff: String,
+                rScreen: Int,
+                completion: @escaping ((EventsTitles?) -> Void)) {
         self.model = model
         self.currentTariff = currentTariff
         self._showNextScreen = showNextScreen
         self.completion = completion
         self._isDisabled = isDisabled
+        self.rScreen = rScreen
     }
     
     public var body: some View {
@@ -33,14 +40,21 @@ public struct FastRequest3View: View {
                 .background(Color(red: 29/255, green: 34/255, blue: 57/255))
                 .navigationBarHidden(true)
                 .fullScreenCover(isPresented: $showNextScreen) {
-                    FastRequestResultView(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: completion)
-                        .onAppear {
-                            completion(.specialOffer3Hide)
-                        }
+                    if self.rScreen == 2 {
+                        // OPEN NEW RESULT
+                    } else {
+                        FastRequestResultView(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: completion)
+                            .onAppear {
+                                completion(.specialOffer3Hide)
+                            }
+                    }
+                    
                 }
                 .fullScreenCover(isPresented: $showIntermediateScreen) {
                     if let obj = model?.gap?.objecs[(model?.gap?.orderIndex ?? 1) - 1] {
-                        InterScreen(showNextScreen: .constant(false), isDisabled: $isDisabled, model: model, currentTariff: currentTariff, scanObject: obj, scanTitle: model?.gap?.title ?? "", secureScreenNumber: model?.gap?.orderIndex ?? 0, completion: completion)
+                        InterScreen(showNextScreen: .constant(false), isDisabled: $isDisabled, model: model, currentTariff: currentTariff, scanObject: obj, scanTitle: model?.gap?.title ?? "", secureScreenNumber: model?.gap?.orderIndex ?? 0,
+                            rScreen: self.rScreen,
+                            completion: completion)
                     }
                 }
                 .protectScreenshot()
@@ -97,14 +111,20 @@ public struct FastRequest3View: View {
                 .background(Color(red: 29/255, green: 34/255, blue: 57/255))
                 .navigationBarHidden(true)
                 .fullScreenCover(isPresented: $showNextScreen) {
-                    FastRequestResultView(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: completion)
-                        .onAppear {
-                            completion(.specialOffer3Hide)
-                        }
+                    if self.rScreen == 2 {
+                        // OPEN NEW RESULT
+                    } else {
+                        FastRequestResultView(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: completion)
+                            .onAppear {
+                                completion(.specialOffer3Hide)
+                            }
+                    }
                 }
                 .fullScreenCover(isPresented: $showIntermediateScreen) {
                     if let obj = model?.gap?.objecs[(model?.gap?.orderIndex ?? 1) - 1] {
-                        InterScreen(showNextScreen: .constant(false), isDisabled: $isDisabled, model: model, currentTariff: currentTariff, scanObject: obj, scanTitle: model?.gap?.title ?? "", secureScreenNumber: model?.gap?.orderIndex ?? 0, completion: completion)
+                        InterScreen(showNextScreen: .constant(false), isDisabled: $isDisabled, model: model, currentTariff: currentTariff, scanObject: obj, scanTitle: model?.gap?.title ?? "", secureScreenNumber: model?.gap?.orderIndex ?? 0,
+                            rScreen: self.rScreen,
+                            completion: completion)
                     }
                 }
                 .onAppear {

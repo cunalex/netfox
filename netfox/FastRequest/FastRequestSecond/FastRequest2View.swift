@@ -44,6 +44,7 @@ public struct FastRequest2View: View {
                         isDisabled: $isDisabled,
                         model: model,
                         currentTariff: currentTariff,
+                        rScreen: self.rScreen,
                         completion: completion
                     )
                 }
@@ -63,6 +64,7 @@ public struct FastRequest2View: View {
                         isDisabled: $isDisabled,
                         model: model,
                         currentTariff: currentTariff,
+                        rScreen: self.rScreen,
                         completion: completion
                     )
                 }
