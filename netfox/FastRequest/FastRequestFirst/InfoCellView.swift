@@ -156,6 +156,44 @@ public struct ResultNewModel: Codable {
     let advText3: String
     let advText4: String
     let sheetBottomTitle: String
+    
+    enum CodingKeys: String, CodingKey {
+            case titleDis = "title_dis"
+            case titleAct = "title_act"
+            case subtitleDis = "subtitle_dis"
+            case subtitleAct = "subtitle_act"
+            case topIconDis = "top_icon_dis"
+            case topIconAct = "top_icon_act"
+            case boxTitleAct = "box_title_act"
+            case boxTitleDis = "box_title_dis"
+            case box1Subtitle = "box1_subtitle"
+            case box2Subtitle = "box2_subtitle"
+            case box3Subtitle = "box3_subtitle"
+            case box4Subtitle = "box4_subtitle"
+            case boxCheckMarkAct = "box_check_mark_act"
+            case boxCheckMarkDis = "box_check_mark_dis"
+            case box1IconAct = "box1_icon_act"
+            case box1IconDis = "box1_icon_dis"
+            case box2IconAct = "box2_icon_act"
+            case box2IconDis = "box2_icon_dis"
+            case box3IconAct = "box3_icon_act"
+            case box3IconDis = "box3_icon_dis"
+            case box4IconAct = "box4_icon_act"
+            case box4IconDis = "box4_icon_dis"
+            case topButtonTitle = "top_button_title"
+            case bottomButtonTitle = "bottom_button_title"
+            case sheetTitle = "sheet_title"
+            case sheetSubtitle = "sheet_subtitle"
+            case advText1Colored = "adv_text1_colored"
+            case advText2Colored = "adv_text2_colored"
+            case advText3Colored = "adv_text3_colored"
+            case advText4Colored = "adv_text4_colored"
+            case advText1 = "adv_text1"
+            case advText2 = "adv_text2"
+            case advText3 = "adv_text3"
+            case advText4 = "adv_text4"
+            case sheetBottomTitle = "sheet_bottom_title"
+        }
 }
 
 struct ScnModel: Codable {
