@@ -40,6 +40,7 @@ public struct FastRequestResultViewNew: View {
                 }
                 .protectScreenshot()
                 .onAppear {
+                    checkState()
                     completion?(.specialOffer5Show)
                     ScreenShield.shared.protectFromScreenRecording()
                 }
@@ -98,6 +99,14 @@ public struct FastRequestResultViewNew: View {
                 })
             }
             .padding()
+        }
+    }
+    
+    private func checkState() {
+        if !isSubscriptionActive {
+            isRealTimeNew = false
+            isWifiNew = false
+            isBatteryNew = false
         }
     }
 }
