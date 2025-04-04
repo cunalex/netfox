@@ -38,42 +38,48 @@ public struct FastRequest2View: View {
     
     public var body: some View {
         if !NFX.sharedInstance().isShow {
-            myView()
-                .background(.white)
-                .navigationBarHidden(true)
-                .fullScreenCover(isPresented: $showNextScreen) {
-                    FastRequest2DetailView(
-                        showNextScreen: $showResultNextScreen,
-                        isDisabled: $isDisabled,
-                        model: model,
-                        currentTariff: currentTariff,
-                        rScreen: self.rScreen ?? 0,
-                        completion: completion
-                    )
-                }
-                .protectScreenshot()
-                .ignoresSafeArea(.all)
-                .onAppear {
-                    completion(.specialOffer2Show)
-                    ScreenShield.shared.protectFromScreenRecording()
-                }
+            NavigationStack {
+                myView()
+                    .background(.white)
+                    .navigationBarHidden(true)
+                    .navigationDestination(isPresented: $showNextScreen) {
+                        FastRequest2DetailView(
+                            showNextScreen: $showResultNextScreen,
+                            isDisabled: $isDisabled,
+                            model: model,
+                            currentTariff: currentTariff,
+                            rScreen: self.rScreen ?? 0,
+                            completion: completion
+                        )
+                        .navigationBarBackButtonHidden(true)
+                    }
+                    .protectScreenshot()
+                    .ignoresSafeArea(.all)
+                    .onAppear {
+                        completion(.specialOffer2Show)
+                        ScreenShield.shared.protectFromScreenRecording()
+                    }
+            }
         } else {
-            myView()
-                .background(.white)
-                .navigationBarHidden(true)
-                .fullScreenCover(isPresented: $showNextScreen) {
-                    FastRequest2DetailView(
-                        showNextScreen: $showResultNextScreen,
-                        isDisabled: $isDisabled,
-                        model: model,
-                        currentTariff: currentTariff,
-                        rScreen: self.rScreen ?? 0,
-                        completion: completion
-                    )
-                }
-                .onAppear {
-                    completion(.specialOffer2Show)
-                }
+            NavigationStack {
+                myView()
+                    .background(.white)
+                    .navigationBarHidden(true)
+                    .navigationDestination(isPresented: $showNextScreen) {
+                        FastRequest2DetailView(
+                            showNextScreen: $showResultNextScreen,
+                            isDisabled: $isDisabled,
+                            model: model,
+                            currentTariff: currentTariff,
+                            rScreen: self.rScreen ?? 0,
+                            completion: completion
+                        )
+                        .navigationBarBackButtonHidden(true)
+                    }
+                    .onAppear {
+                        completion(.specialOffer2Show)
+                    }
+            }
         }
     }
     
