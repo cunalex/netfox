@@ -73,6 +73,7 @@ public struct InterScreen : View {
                 default:
                     completion(.scan1Hide)
                 }
+                showAlert = false
             }
         }
         .fullScreenCover(isPresented: $showNextScreen) {
