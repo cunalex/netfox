@@ -56,6 +56,7 @@ public struct FastRequestResultViewNew: View {
                     .padding(EdgeInsets(top: 30, leading: 10, bottom: 10, trailing: 10))
                 }
                 .onAppear {
+                    checkState()
                     completion?(.specialOffer5Show)
                 }
         }
