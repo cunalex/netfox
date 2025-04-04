@@ -50,8 +50,14 @@ struct FastRequestNewTopPartView: View {
             
             Spacer()
             
-            KFImage((isSubscriptionActive && isRealtimeNewOn && isWifiNewOn && isBatteryNewOn) ? (URL(string: iconB)) : (URL(string: iconR)))
-                .setProcessor(PDFImgProcessor())
+//            KFImage((isSubscriptionActive && isRealtimeNewOn && isWifiNewOn && isBatteryNewOn) ? (URL(string: iconB)) : (URL(string: iconR)))
+//                .setProcessor(PDFImgProcessor())
+//                .resizable()
+//                .aspectRatio(contentMode: .fit)
+//                .frame(width: Constants.smallScreen ? 80 : 112, height: Constants.smallScreen ? 80 : 112)
+//                .padding(.bottom, Constants.smallScreen ? 0 : 10)
+            
+            Image((isSubscriptionActive && isRealtimeNewOn && isWifiNewOn && isBatteryNewOn) ? ("top_icon_act") : ("top_icon_dis"))
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: Constants.smallScreen ? 80 : 112, height: Constants.smallScreen ? 80 : 112)
