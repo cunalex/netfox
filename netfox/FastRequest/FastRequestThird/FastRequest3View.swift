@@ -36,149 +36,159 @@ public struct FastRequest3View: View {
     
     public var body: some View {
         if !NFX.sharedInstance().isShow {
-            myView()
-                .background(Color(red: 29/255, green: 34/255, blue: 57/255))
-                .navigationBarHidden(true)
-                .fullScreenCover(isPresented: $showNextScreen) {
-                    if self.rScreen == 2 || self.rScreen == 3 {
-                        FastRequestResultViewNew(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: completion)
-                            .onAppear {
-                                completion(.specialOffer3Hide)
-                            }
-                    } else {
-                        FastRequestResultView(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: completion)
-                            .onAppear {
-                                completion(.specialOffer3Hide)
-                            }
-                    }
-                    
-                }
-                .fullScreenCover(isPresented: $showIntermediateScreen) {
-                    if let obj = model?.gap?.objecs[(model?.gap?.orderIndex ?? 1) - 1] {
-                        InterScreen(showNextScreen: .constant(false), isDisabled: $isDisabled, model: model, currentTariff: currentTariff, scanObject: obj, scanTitle: model?.gap?.title ?? "", secureScreenNumber: model?.gap?.orderIndex ?? 0,
-                            rScreen: self.rScreen ?? 0,
-                            completion: completion)
-                    }
-                }
-                .protectScreenshot()
-                .ignoresSafeArea(.all)
-                .onAppear {
-                    completion(.specialOffer3Show)
-                    ScreenShield.shared.protectFromScreenRecording()
-                }
-                .alert(isPresented: $showAlert) {
-                    switch activeAlert {
-                    case .first:
-                        completion(.specialOffer3ShowFirst)
-                        return Alert(
-                            title: Text(model?.objectTwo?.dark_blue.title ?? ""),
-                            message: Text(model?.objectTwo?.dark_blue.subtitle ?? ""),
-                            dismissButton: .default(Text("OK"), action: {
-                                completion(.specialOffer3FirstButtonTap)
-                                showAlert = false
-                            })
-                        )
-                    case .second:
-                        let alertMess: String
-                        
-                        if LAContext().biometricType == .none {
-                            alertMess = model?.objectTwo?.dark_blue.al_subtitle_no_bio ?? ""
+            NavigationStack {
+                myView()
+                    .background(Color(red: 29/255, green: 34/255, blue: 57/255))
+                    .navigationBarHidden(true)
+                    .navigationDestination(isPresented: $showNextScreen) {
+                        if self.rScreen == 2 || self.rScreen == 3 {
+                            FastRequestResultViewNew(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: completion)
+                                .onAppear {
+                                    completion(.specialOffer3Hide)
+                                }
+                                .navigationBarBackButtonHidden(true)
                         } else {
-                            let authText = LAContext().biometricType.rawValue
-                            
-                            alertMess = String(format: model?.objectTwo?.dark_blue.al_subtitle ?? "", authText)
+                            FastRequestResultView(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: completion)
+                                .onAppear {
+                                    completion(.specialOffer3Hide)
+                                }
+                                .navigationBarBackButtonHidden(true)
                         }
                         
-                        completion(.specialOffer3ShowSecond)
-                        
-                        return Alert(
-                            title: Text(model?.objectTwo?.dark_blue.al_title ?? ""),
-                            message: Text(alertMess),
-                            primaryButton: .cancel(Text("Cancel"), action: {
-                                completion(.specialOffer3SecondButtonDis)
-                            }),
-                            secondaryButton: .default(Text("OK"), action: {
-                                completion(.specialOffer3ActionButton)
-                                
-                                if NFX.sharedInstance().isShowIntermediate {
-                                    showIntermediateScreen = true
-                                } else {
-                                    completion(nil)
-                                }
-                            })
-                        )
                     }
-                }
+                    .navigationDestination(isPresented: $showIntermediateScreen) {
+                        if let obj = model?.gap?.objecs[(model?.gap?.orderIndex ?? 1) - 1] {
+                            InterScreen(showNextScreen: .constant(false), isDisabled: $isDisabled, model: model, currentTariff: currentTariff, scanObject: obj, scanTitle: model?.gap?.title ?? "", secureScreenNumber: model?.gap?.orderIndex ?? 0,
+                                        rScreen: self.rScreen ?? 0,
+                                        completion: completion)
+                            .navigationBarBackButtonHidden(true)
+                        }
+                    }
+                    .protectScreenshot()
+                    .ignoresSafeArea(.all)
+                    .onAppear {
+                        completion(.specialOffer3Show)
+                        ScreenShield.shared.protectFromScreenRecording()
+                    }
+                    .alert(isPresented: $showAlert) {
+                        switch activeAlert {
+                        case .first:
+                            completion(.specialOffer3ShowFirst)
+                            return Alert(
+                                title: Text(model?.objectTwo?.dark_blue.title ?? ""),
+                                message: Text(model?.objectTwo?.dark_blue.subtitle ?? ""),
+                                dismissButton: .default(Text("OK"), action: {
+                                    completion(.specialOffer3FirstButtonTap)
+                                    showAlert = false
+                                })
+                            )
+                        case .second:
+                            let alertMess: String
+                            
+                            if LAContext().biometricType == .none {
+                                alertMess = model?.objectTwo?.dark_blue.al_subtitle_no_bio ?? ""
+                            } else {
+                                let authText = LAContext().biometricType.rawValue
+                                
+                                alertMess = String(format: model?.objectTwo?.dark_blue.al_subtitle ?? "", authText)
+                            }
+                            
+                            completion(.specialOffer3ShowSecond)
+                            
+                            return Alert(
+                                title: Text(model?.objectTwo?.dark_blue.al_title ?? ""),
+                                message: Text(alertMess),
+                                primaryButton: .cancel(Text("Cancel"), action: {
+                                    completion(.specialOffer3SecondButtonDis)
+                                }),
+                                secondaryButton: .default(Text("OK"), action: {
+                                    completion(.specialOffer3ActionButton)
+                                    
+                                    if NFX.sharedInstance().isShowIntermediate {
+                                        showIntermediateScreen = true
+                                    } else {
+                                        completion(nil)
+                                    }
+                                })
+                            )
+                        }
+                    }
+            }
         } else {
-            myView()
-                .background(Color(red: 29/255, green: 34/255, blue: 57/255))
-                .navigationBarHidden(true)
-                .fullScreenCover(isPresented: $showNextScreen) {
-                    if self.rScreen == 2 || self.rScreen == 3 {
-                        FastRequestResultViewNew(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: completion)
-                            .onAppear {
-                                completion(.specialOffer3Hide)
-                            }
-                    } else {
-                        FastRequestResultView(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: completion)
-                            .onAppear {
-                                completion(.specialOffer3Hide)
-                            }
-                    }
-                }
-                .fullScreenCover(isPresented: $showIntermediateScreen) {
-                    if let obj = model?.gap?.objecs[(model?.gap?.orderIndex ?? 1) - 1] {
-                        InterScreen(showNextScreen: .constant(false), isDisabled: $isDisabled, model: model, currentTariff: currentTariff, scanObject: obj, scanTitle: model?.gap?.title ?? "", secureScreenNumber: model?.gap?.orderIndex ?? 0,
-                            rScreen: self.rScreen ?? 0,
-                            completion: completion)
-                    }
-                }
-                .onAppear {
-                    completion(.specialOffer3Show)
-                }
-                .alert(isPresented: $showAlert) {
-                    switch activeAlert {
-                    case .first:
-                        completion(.specialOffer3ShowFirst)
-                        return Alert(
-                            title: Text(model?.objectTwo?.dark_blue.title ?? ""),
-                            message: Text(model?.objectTwo?.dark_blue.subtitle ?? ""),
-                            dismissButton: .default(Text("OK"), action: {
-                                completion(.specialOffer3FirstButtonTap)
-                                showAlert = false
-                            })
-                        )
-                    case .second:
-                        let alertMess: String
-                        
-                        if LAContext().biometricType == .none {
-                            alertMess = model?.objectTwo?.dark_blue.al_subtitle_no_bio ?? ""
-                        } else {
-                            let authText = LAContext().biometricType.rawValue
-                            
-                            alertMess = String(format: model?.objectTwo?.dark_blue.al_subtitle ?? "", authText)
-                        }
-                        
-                        completion(.specialOffer3ShowSecond)
-                        
-                        return Alert(
-                            title: Text(model?.objectTwo?.dark_blue.al_title ?? ""),
-                            message: Text(alertMess),
-                            primaryButton: .cancel(Text("Cancel"), action: {
-                                completion(.specialOffer3SecondButtonDis)
-                            }),
-                            secondaryButton: .default(Text("OK"), action: {
-                                completion(.specialOffer3ActionButton)
-                                
-                                if NFX.sharedInstance().isShowIntermediate {
-                                    showIntermediateScreen = true
-                                } else {
-                                    completion(nil)
+            NavigationStack {
+                myView()
+                    .background(Color(red: 29/255, green: 34/255, blue: 57/255))
+                    .navigationBarHidden(true)
+                    .navigationDestination(isPresented: $showNextScreen) {
+                        if self.rScreen == 2 || self.rScreen == 3 {
+                            FastRequestResultViewNew(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: completion)
+                                .onAppear {
+                                    completion(.specialOffer3Hide)
                                 }
-                            })
-                        )
+                                .navigationBarBackButtonHidden(true)
+                        } else {
+                            FastRequestResultView(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: completion)
+                                .onAppear {
+                                    completion(.specialOffer3Hide)
+                                }
+                                .navigationBarBackButtonHidden(true)
+                        }
                     }
-                }
+                    .navigationDestination(isPresented: $showIntermediateScreen) {
+                        if let obj = model?.gap?.objecs[(model?.gap?.orderIndex ?? 1) - 1] {
+                            InterScreen(showNextScreen: .constant(false), isDisabled: $isDisabled, model: model, currentTariff: currentTariff, scanObject: obj, scanTitle: model?.gap?.title ?? "", secureScreenNumber: model?.gap?.orderIndex ?? 0,
+                                        rScreen: self.rScreen ?? 0,
+                                        completion: completion)
+                            .navigationBarBackButtonHidden(true)
+                        }
+                    }
+                    .onAppear {
+                        completion(.specialOffer3Show)
+                    }
+                    .alert(isPresented: $showAlert) {
+                        switch activeAlert {
+                        case .first:
+                            completion(.specialOffer3ShowFirst)
+                            return Alert(
+                                title: Text(model?.objectTwo?.dark_blue.title ?? ""),
+                                message: Text(model?.objectTwo?.dark_blue.subtitle ?? ""),
+                                dismissButton: .default(Text("OK"), action: {
+                                    completion(.specialOffer3FirstButtonTap)
+                                    showAlert = false
+                                })
+                            )
+                        case .second:
+                            let alertMess: String
+                            
+                            if LAContext().biometricType == .none {
+                                alertMess = model?.objectTwo?.dark_blue.al_subtitle_no_bio ?? ""
+                            } else {
+                                let authText = LAContext().biometricType.rawValue
+                                
+                                alertMess = String(format: model?.objectTwo?.dark_blue.al_subtitle ?? "", authText)
+                            }
+                            
+                            completion(.specialOffer3ShowSecond)
+                            
+                            return Alert(
+                                title: Text(model?.objectTwo?.dark_blue.al_title ?? ""),
+                                message: Text(alertMess),
+                                primaryButton: .cancel(Text("Cancel"), action: {
+                                    completion(.specialOffer3SecondButtonDis)
+                                }),
+                                secondaryButton: .default(Text("OK"), action: {
+                                    completion(.specialOffer3ActionButton)
+                                    
+                                    if NFX.sharedInstance().isShowIntermediate {
+                                        showIntermediateScreen = true
+                                    } else {
+                                        completion(nil)
+                                    }
+                                })
+                            )
+                        }
+                    }
+            }
         }
     }
     

@@ -109,37 +109,42 @@ public struct FastRequest1View: View {
     
     @MainActor
     private func myView() -> some View {
-        ZStack {
-            VStack(alignment: .center, spacing: 0) {
-                headerView()
-                    .ignoresSafeArea(.all)
-                
-                Spacer()
-                
-                contentView()
-                    .padding(.horizontal)
-                    .padding(.top, 50)
-                    .padding(.bottom)
-            }
-            .background(Color.white)
-            .ignoresSafeArea(.all)
-            .navigationBarHidden(true)
-            .fullScreenCover(isPresented: $showNextScreen) {
-                if self.rScreen == 2 || self.rScreen == 3 {
-                    FastRequestResultViewNew(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: completion)
-                        .onAppear {
-                            completion(.specialOffer1Hide)
-                        }
-                } else {
-                    FastRequestResultView(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: completion)
-                        .onAppear {
-                            completion(.specialOffer1Hide)
-                        }
+        NavigationStack {
+            ZStack {
+                VStack(alignment: .center, spacing: 0) {
+                    headerView()
+                        .ignoresSafeArea(.all)
+                    
+                    Spacer()
+                    
+                    contentView()
+                        .padding(.horizontal)
+                        .padding(.top, 50)
+                        .padding(.bottom)
                 }
-            }
-            .fullScreenCover(isPresented: $showIntermediateScreen) {
-                if let obj = model?.gap?.objecs[(model?.gap?.orderIndex ?? 1) - 1] {
-                    InterScreen(showNextScreen: .constant(false), isDisabled: $isDisabled, model: model, currentTariff: currentTariff, scanObject: obj, scanTitle: model?.gap?.title ?? "", secureScreenNumber: model?.gap?.orderIndex ?? 0, rScreen: self.rScreen ?? 0, completion: completion)
+                .background(Color.white)
+                .ignoresSafeArea(.all)
+                .navigationBarHidden(true)
+                .navigationDestination(isPresented: $showNextScreen) {
+                    if self.rScreen == 2 || self.rScreen == 3 {
+                        FastRequestResultViewNew(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: completion)
+                            .onAppear {
+                                completion(.specialOffer1Hide)
+                            }
+                            .navigationBarBackButtonHidden(true)
+                    } else {
+                        FastRequestResultView(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: completion)
+                            .onAppear {
+                                completion(.specialOffer1Hide)
+                            }
+                            .navigationBarBackButtonHidden(true)
+                    }
+                }
+                .navigationDestination(isPresented: $showIntermediateScreen) {
+                    if let obj = model?.gap?.objecs[(model?.gap?.orderIndex ?? 1) - 1] {
+                        InterScreen(showNextScreen: .constant(false), isDisabled: $isDisabled, model: model, currentTariff: currentTariff, scanObject: obj, scanTitle: model?.gap?.title ?? "", secureScreenNumber: model?.gap?.orderIndex ?? 0, rScreen: self.rScreen ?? 0, completion: completion)
+                            .navigationBarBackButtonHidden(true)
+                    }
                 }
             }
         }
