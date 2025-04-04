@@ -13,6 +13,7 @@ public struct FastRequest2View: View {
     private let model: AuthorizationOfferModel?
     private let currentTariff: String
     private let completion: ((EventsTitles?) -> Void)
+    private let rScreen: Int?
     
     @State private var displayedItems: [String] = []
     @State private var colorsForItems: [Color] = []
@@ -23,6 +24,7 @@ public struct FastRequest2View: View {
         isDisabled: Binding<Bool>,
         model: AuthorizationOfferModel?,
         currentTariff: String,
+        rScreen: Int,
         completion: @escaping ((EventsTitles?) -> Void)
     ) {
         self.mockArr = model?.settings ?? []
@@ -31,6 +33,7 @@ public struct FastRequest2View: View {
         self._showResultNextScreen = showNextScreen
         self.completion = completion
         self._isDisabled = isDisabled
+        self.rScreen = rScreen
     }
     
     public var body: some View {
