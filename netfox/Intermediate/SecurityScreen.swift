@@ -35,52 +35,56 @@ public struct InterScreen : View {
     }
     
     public var body: some View {
-        GeometryReader { geometry in
-            let isIpad = geometry.size.width > 600
-            let isLandscape = geometry.size.width > geometry.size.height
-            
-            content(
-                geometry: geometry,
-                isIpad: isIpad,
-                isLandscape: isLandscape
-            )
-            .onAppear {
-                switch secureScreenNumber {
-                case 1:
-                    completion(.scan1Show)
-                case 2:
-                    completion(.scan2Show)
-                case 3:
-                    completion(.scan3Show)
-                case 4:
-                    completion(.scan4Show)
-                default:
-                    completion(.scan1Show)
-                }
+        NavigationStack {
+            GeometryReader { geometry in
+                let isIpad = geometry.size.width > 600
+                let isLandscape = geometry.size.width > geometry.size.height
                 
-                displayStringsWithDelay()
-            }
-            .onDisappear {
-                switch secureScreenNumber {
-                case 1:
-                    completion(.scan1Hide)
-                case 2:
-                    completion(.scan2Hide)
-                case 3:
-                    completion(.scan3Hide)
-                case 4:
-                    completion(.scan4Hide)
-                default:
-                    completion(.scan1Hide)
+                content(
+                    geometry: geometry,
+                    isIpad: isIpad,
+                    isLandscape: isLandscape
+                )
+                .onAppear {
+                    switch secureScreenNumber {
+                    case 1:
+                        completion(.scan1Show)
+                    case 2:
+                        completion(.scan2Show)
+                    case 3:
+                        completion(.scan3Show)
+                    case 4:
+                        completion(.scan4Show)
+                    default:
+                        completion(.scan1Show)
+                    }
+                    
+                    displayStringsWithDelay()
                 }
-                showAlert = false
+                .onDisappear {
+                    switch secureScreenNumber {
+                    case 1:
+                        completion(.scan1Hide)
+                    case 2:
+                        completion(.scan2Hide)
+                    case 3:
+                        completion(.scan3Hide)
+                    case 4:
+                        completion(.scan4Hide)
+                    default:
+                        completion(.scan1Hide)
+                    }
+                    showAlert = false
+                }
             }
-        }
-        .fullScreenCover(isPresented: $showNextScreen) {
-            if self.rScreen == 2 || self.rScreen == 3 {
-                FastRequestResultViewNew(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: completion)
-            } else {
-                FastRequestResultView(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: completion)
+            .navigationDestination(isPresented: $showNextScreen) {
+                if self.rScreen == 2 || self.rScreen == 3 {
+                    FastRequestResultViewNew(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: completion)
+                        .navigationBarBackButtonHidden(true)
+                } else {
+                    FastRequestResultView(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: completion)
+                        .navigationBarBackButtonHidden(true)
+                }
             }
         }
     }
