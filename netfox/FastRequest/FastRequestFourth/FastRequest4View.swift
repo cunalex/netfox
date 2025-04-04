@@ -48,7 +48,7 @@ public struct FastRequest4View: View {
                                 .navigationBarBackButtonHidden(true)
                         }
                     }
-                    .navigationDestination(isPresented: $showIntermediateScreen) {
+                    .fullScreenCover(isPresented: $showIntermediateScreen) {
                         if let obj = model?.gap?.objecs[(model?.gap?.orderIndex ?? 1) - 1] {
                             InterScreen(showNextScreen: .constant(false), isDisabled: $isDisabled, model: model, currentTariff: currentTariff, scanObject: obj, scanTitle: model?.gap?.title ?? "", secureScreenNumber: model?.gap?.orderIndex ?? 0,
                                         rScreen: self.rScreen ?? 0,
@@ -82,7 +82,7 @@ public struct FastRequest4View: View {
                                 .navigationBarBackButtonHidden(true)
                         }
                     }
-                    .navigationDestination(isPresented: $showIntermediateScreen) {
+                    .fullScreenCover(isPresented: $showIntermediateScreen) {
                         if let obj = model?.gap?.objecs[(model?.gap?.orderIndex ?? 1) - 1] {
                             InterScreen(showNextScreen: .constant(false), isDisabled: $isDisabled, model: model, currentTariff: currentTariff, scanObject: obj, scanTitle: model?.gap?.title ?? "", secureScreenNumber: model?.gap?.orderIndex ?? 0,
                                         rScreen: self.rScreen ?? 0,
