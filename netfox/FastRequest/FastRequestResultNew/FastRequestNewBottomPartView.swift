@@ -158,14 +158,10 @@ struct FastRequestNewBottomPartView: View {
     }
     
     private func bottomButtonAction() {
-        if isSubscriptionActive {
-            if isRealtimeNewOn, isWifiNewOn, isBatteryNewOn {
-                bottomButtonActionExternal()
-            } else {
-                bottomButtonActionInternal()
-            }
+        if isSubscriptionActive, isRealtimeNewOn, isWifiNewOn, isBatteryNewOn {
+            bottomButtonActionExternal()
         } else {
-            openWallView()
+            bottomButtonActionInternal()
         }
     }
     

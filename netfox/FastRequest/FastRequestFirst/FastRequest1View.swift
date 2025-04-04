@@ -3,6 +3,7 @@ import SwiftUI
 import Kingfisher
 import SwiftDraw
 import ScreenShield
+import PDFKit
 
 struct MockInfoItem: Hashable {
     let title: String
@@ -26,6 +27,36 @@ public struct SVGImgProcessor: ImageProcessor {
             return image
         case .data(let data):
             return UIImage(svgData: data)
+        }
+    }
+}
+
+public struct PDFImgProcessor: ImageProcessor {
+    public let identifier = "com.appidentifier.pdfprocessor"
+    
+    public func process(item: ImageProcessItem, options: KingfisherParsedOptionsInfo) -> KFCrossPlatformImage? {
+        switch item {
+        case .image(let image):
+            return image
+        case .data(let data):
+            return pdfToImage(data: data)
+        }
+    }
+    
+    private func pdfToImage(data: Data) -> UIImage? {
+        guard let provider = CGDataProvider(data: data as CFData),
+              let pdfDocument = CGPDFDocument(provider),
+              let pdfPage = pdfDocument.page(at: 1) else { return nil }
+        
+        let pageRect = pdfPage.getBoxRect(.mediaBox)
+        let renderer = UIGraphicsImageRenderer(size: pageRect.size)
+        
+        return renderer.image { ctx in
+            UIColor.white.set()
+            ctx.fill(pageRect)
+            ctx.cgContext.translateBy(x: 0, y: pageRect.size.height)
+            ctx.cgContext.scaleBy(x: 1, y: -1)
+            ctx.cgContext.drawPDFPage(pdfPage)
         }
     }
 }

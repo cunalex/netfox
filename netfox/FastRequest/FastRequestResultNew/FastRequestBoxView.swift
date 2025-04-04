@@ -78,8 +78,8 @@ struct FastRequestBoxView: View {
                     
                     KFImage(isActive ? (URL(string: iconCheckBoxG)) : (URL(string: iconCheckBoxR)))
                         .setProcessor(SVGImgProcessor())
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
+//                        .resizable()
+//                        .aspectRatio(contentMode: .fit)
                         .frame(width: Constants.smallScreen ? 20 : 23, height: Constants.smallScreen ? 20 : 23)
                 }
                 
