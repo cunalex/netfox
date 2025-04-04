@@ -44,6 +44,8 @@ open class NFX: NSObject {
     public var isShow: Bool = true
     public var isShowIntermediate: Bool = true
     public var isSheet = true
+    public var feature1Title = "Feature 1"
+    public var feature2Title = "Feature 2"
     
     fileprivate var started: Bool = false
     fileprivate var presented: Bool = false

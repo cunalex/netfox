@@ -95,7 +95,10 @@ public struct FastRequest1View: View {
             .navigationBarHidden(true)
             .fullScreenCover(isPresented: $showNextScreen) {
                 if self.rScreen == 2 {
-                    // OPEN NEW RESULT
+                    FastRequestResultViewNew(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: completion)
+                        .onAppear {
+                            completion(.specialOffer1Hide)
+                        }
                 } else {
                     FastRequestResultView(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: completion)
                         .onAppear {

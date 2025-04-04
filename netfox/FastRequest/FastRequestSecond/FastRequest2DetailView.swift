@@ -46,7 +46,10 @@ public struct FastRequest2DetailView: View {
                 .ignoresSafeArea(.all)
                 .fullScreenCover(isPresented: $showNextScreen) {
                     if self.rScreen == 2 {
-                        // OPEN NEW RESULT
+                        FastRequestResultViewNew(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: completion)
+                            .onAppear {
+                                completion(.specialOffer2Hide)
+                            }
                     } else {
                         FastRequestResultView(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: completion)
                             .onAppear {
@@ -69,7 +72,10 @@ public struct FastRequest2DetailView: View {
             myView()
                 .fullScreenCover(isPresented: $showNextScreen) {
                     if self.rScreen == 2 {
-                        // OPEN NEW RESULT
+                        FastRequestResultViewNew(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: completion)
+                            .onAppear {
+                                completion(.specialOffer2Hide)
+                            }
                     } else {
                         FastRequestResultView(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: completion)
                             .onAppear {
