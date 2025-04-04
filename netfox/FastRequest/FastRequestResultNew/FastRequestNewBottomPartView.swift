@@ -73,7 +73,7 @@ struct FastRequestNewBottomPartView: View {
                                    iconCheckBoxG: model?.boxCheckMarkAct ?? "",
                                    iconCheckBoxR: model?.boxCheckMarkDis ?? "",
                                    isLoading: isLoading2,
-                                   isActive: isRealtimeNewOn)
+                                   isActive: isRealtimeNewOn && isSubscriptionActive)
             }
             .frame(height: Constants.smallScreen ? 80 : 92)
             
@@ -86,7 +86,7 @@ struct FastRequestNewBottomPartView: View {
                                    iconCheckBoxG: model?.boxCheckMarkAct ?? "",
                                    iconCheckBoxR: model?.boxCheckMarkDis ?? "",
                                    isLoading: isLoading3,
-                                   isActive: isWifiNewOn)
+                                   isActive: isWifiNewOn && isSubscriptionActive)
                 
                 FastRequestBoxView(topTextG: model?.boxTitleAct ?? "",
                                    topTextR: model?.boxTitleDis ?? "",
@@ -96,7 +96,7 @@ struct FastRequestNewBottomPartView: View {
                                    iconCheckBoxG: model?.boxCheckMarkAct ?? "",
                                    iconCheckBoxR: model?.boxCheckMarkDis ?? "",
                                    isLoading: isLoading4,
-                                   isActive: isBatteryNewOn)
+                                   isActive: isBatteryNewOn && isSubscriptionActive)
             }
             .frame(height: Constants.smallScreen ? 80 : 92)
         }
