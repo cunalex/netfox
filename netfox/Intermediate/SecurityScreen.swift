@@ -76,7 +76,7 @@ public struct InterScreen : View {
             }
         }
         .fullScreenCover(isPresented: $showNextScreen) {
-            if self.rScreen == 2 {
+            if self.rScreen == 2 || self.rScreen == 3 {
                 FastRequestResultViewNew(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: completion)
             } else {
                 FastRequestResultView(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: completion)
