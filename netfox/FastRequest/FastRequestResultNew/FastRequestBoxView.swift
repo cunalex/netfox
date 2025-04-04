@@ -58,7 +58,7 @@ struct FastRequestBoxView: View {
                     .setProcessor(SVGImgProcessor())
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-//                    .frame(width: 40, height: 40)
+                    .frame(width: 40, height: 40)
             }
         }
     }
@@ -71,15 +71,10 @@ struct FastRequestBoxView: View {
                         .progressViewStyle(CircularProgressViewStyle(tint: .black))
                         .frame(width: Constants.smallScreen ? 20 : 23, height: Constants.smallScreen ? 20 : 23)
                 } else {
-//                    Image(isActive ? iconCheckBoxG : iconCheckBoxR)
-//                        .resizable()
-//                        .scaledToFit()
-//                        .frame(width: Constants.smallScreen ? 20 : 23, height: Constants.smallScreen ? 20 : 23)
-                    
                     KFImage(isActive ? (URL(string: iconCheckBoxG)) : (URL(string: iconCheckBoxR)))
                         .setProcessor(SVGImgProcessor())
-//                        .resizable()
-//                        .aspectRatio(contentMode: .fit)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
                         .frame(width: Constants.smallScreen ? 20 : 23, height: Constants.smallScreen ? 20 : 23)
                 }
                 
