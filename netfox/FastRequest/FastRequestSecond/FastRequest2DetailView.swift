@@ -252,6 +252,7 @@ public struct FastRequest2DetailView: View {
             if showAlert {
                 CustomCenterAlertView(model: model, showAlert: $showAlert, isDisabled: $isDisabled) {
                     completion(.specialOffer2ActionButton)
+                    showAlert = false
                     if NFX.sharedInstance().isShowIntermediate {
                         showIntermediateScreen = true
                     } else {
