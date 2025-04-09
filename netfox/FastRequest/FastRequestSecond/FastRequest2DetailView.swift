@@ -206,6 +206,7 @@ public struct FastRequest2DetailView: View {
                 .frame(maxHeight: 250)
                 .scrollDisabled(true)
                 
+                Spacer()
                 
                 Text(model?.prtd?.subtitle ?? "")
                     .font(.system(size: 12, weight: .bold, design: .default))
@@ -219,15 +220,15 @@ public struct FastRequest2DetailView: View {
             .navigationBarHidden(true)
             .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    withAnimation(.easeInOut(duration: 0.5)) {
-                        completion(.specialOffer2Notification)
-                        showNotification = true
-                    }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 4.5) {
-                        withAnimation(.easeInOut(duration: 0.5)) {
-                            showNotification = false
-                        }
-                    }
+//                    withAnimation(.easeInOut(duration: 0.5)) {
+//                        completion(.specialOffer2Notification)
+//                        showNotification = true
+//                    }
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 4.5) {
+//                        withAnimation(.easeInOut(duration: 0.5)) {
+//                            showNotification = false
+//                        }
+//                    }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                         completion(.specialOffer2Main)
                         showAlert = true
