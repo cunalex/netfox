@@ -227,7 +227,7 @@ public struct FastRequest2DetailView: View {
 //                            showNotification = false
 //                        }
 //                    }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         completion(.specialOffer2Main)
                         showAlert = true
                     }
