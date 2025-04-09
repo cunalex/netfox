@@ -213,8 +213,6 @@ public struct FastRequest2DetailView: View {
                     .foregroundStyle(.white)
                     .multilineTextAlignment(.center)
                     .padding(.vertical)
-                
-                Spacer()
             }
             .background(.black)
             .navigationBarHidden(true)
