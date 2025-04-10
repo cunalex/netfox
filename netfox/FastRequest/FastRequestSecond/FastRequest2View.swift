@@ -12,6 +12,7 @@ public struct FastRequest2View: View {
     private let mockArr: [String]
     private let model: AuthorizationOfferModel?
     private let currentTariff: String
+    @Binding var isSubscriptionActive: Bool
     private let completion: ((EventsTitles?) -> Void)
     private let rScreen: Int?
     
@@ -24,6 +25,7 @@ public struct FastRequest2View: View {
         isDisabled: Binding<Bool>,
         model: AuthorizationOfferModel?,
         currentTariff: String,
+        isSubscriptionActive: Binding<Bool>,
         rScreen: Int,
         completion: @escaping ((EventsTitles?) -> Void)
     ) {
@@ -31,6 +33,7 @@ public struct FastRequest2View: View {
         self.model = model
         self.currentTariff = currentTariff
         self._showResultNextScreen = showNextScreen
+        self._isSubscriptionActive = isSubscriptionActive
         self.completion = completion
         self._isDisabled = isDisabled
         self.rScreen = rScreen
@@ -49,6 +52,7 @@ public struct FastRequest2View: View {
                             model: model,
                             currentTariff: currentTariff,
                             rScreen: self.rScreen ?? 0,
+                            isSubscriptionActive: $isSubscriptionActive,
                             completion: completion
                         )
                         .navigationBarBackButtonHidden(true)
@@ -72,6 +76,7 @@ public struct FastRequest2View: View {
                             model: model,
                             currentTariff: currentTariff,
                             rScreen: self.rScreen ?? 0,
+                            isSubscriptionActive: $isSubscriptionActive,
                             completion: completion
                         )
                         .navigationBarBackButtonHidden(true)

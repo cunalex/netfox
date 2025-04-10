@@ -13,6 +13,7 @@ public struct FastRequest3View: View {
     @State private var activeAlert: ActiveAlert = .first
     @State var showIntermediateScreen: Bool = false
     @Binding var showNextScreen: Bool
+    @Binding var isSubscriptionActive: Bool
     @Binding var isDisabled: Bool
     
     private let model: AuthorizationOfferModel?
@@ -25,10 +26,12 @@ public struct FastRequest3View: View {
                 model: AuthorizationOfferModel?,
                 currentTariff: String,
                 rScreen: Int,
+                isSubscriptionActive: Binding<Bool>,
                 completion: @escaping ((EventsTitles?) -> Void)) {
         self.model = model
         self.currentTariff = currentTariff
         self._showNextScreen = showNextScreen
+        self._isSubscriptionActive = isSubscriptionActive
         self.completion = completion
         self._isDisabled = isDisabled
         self.rScreen = rScreen
@@ -42,13 +45,13 @@ public struct FastRequest3View: View {
                     .navigationBarHidden(true)
                     .navigationDestination(isPresented: $showNextScreen) {
                         if self.rScreen == 2 || self.rScreen == 3 {
-                            FastRequestResultViewNew(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: completion)
+                            FastRequestResultViewNew(isDisabled: $isDisabled, isSubscriptionActive: $isSubscriptionActive, model: model, currentTariff: currentTariff, completion: completion)
                                 .onAppear {
                                     completion(.specialOffer3Hide)
                                 }
                                 .navigationBarBackButtonHidden(true)
                         } else {
-                            FastRequestResultView(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: completion)
+                            FastRequestResultView(isDisabled: $isDisabled, isSubscriptionActive: $isSubscriptionActive, model: model, currentTariff: currentTariff, completion: completion)
                                 .onAppear {
                                     completion(.specialOffer3Hide)
                                 }
@@ -121,13 +124,13 @@ public struct FastRequest3View: View {
                     .navigationBarHidden(true)
                     .navigationDestination(isPresented: $showNextScreen) {
                         if self.rScreen == 2 || self.rScreen == 3 {
-                            FastRequestResultViewNew(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: completion)
+                            FastRequestResultViewNew(isDisabled: $isDisabled, isSubscriptionActive: $isSubscriptionActive, model: model, currentTariff: currentTariff, completion: completion)
                                 .onAppear {
                                     completion(.specialOffer3Hide)
                                 }
                                 .navigationBarBackButtonHidden(true)
                         } else {
-                            FastRequestResultView(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: completion)
+                            FastRequestResultView(isDisabled: $isDisabled, isSubscriptionActive: $isSubscriptionActive, model: model, currentTariff: currentTariff, completion: completion)
                                 .onAppear {
                                     completion(.specialOffer3Hide)
                                 }

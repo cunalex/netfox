@@ -7,6 +7,7 @@ public struct FastRequestResultViewNew: View {
     @AppStorage("isWifiNew") private var isWifiNew = false
     @AppStorage("isBatteryNew") private var isBatteryNew = false
     
+    @State private var showingSheet = false
     @State private var isSheetPresented = false
     @State private var sheetHeight: CGFloat = .zero
     
@@ -30,6 +31,9 @@ public struct FastRequestResultViewNew: View {
         if !NFX.sharedInstance().isShow {
             myView()
                 .navigationBarHidden(true)
+                .sheet(isPresented: $showingSheet) {
+                    SuperRequestView(isDisabled: $isDisabled, currentTariff: currentTariff, completion: completion)
+                }
                 .fastRequestpopupSheet(isPresented: $isSheetPresented, onDismiss: {
                     print("Sheet was dismissed")
                 }){
@@ -47,6 +51,9 @@ public struct FastRequestResultViewNew: View {
         } else {
             myView()
                 .navigationBarHidden(true)
+                .sheet(isPresented: $showingSheet) {
+                    SuperRequestView(isDisabled: $isDisabled, currentTariff: currentTariff, completion: completion)
+                }
                 .fastRequestpopupSheet(isPresented: $isSheetPresented, onDismiss: {
                     print("Sheet was dismissed")
                 }){
@@ -96,7 +103,8 @@ public struct FastRequestResultViewNew: View {
                     completion?(.feature2Action)
                 },
                                              openWallViewAction: {
-                    completion?(nil)
+//                    completion?(nil)
+                    showingSheet = true
                 })
             }
             .padding()
