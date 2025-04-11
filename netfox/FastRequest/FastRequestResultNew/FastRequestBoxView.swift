@@ -5,6 +5,7 @@ import Kingfisher
 struct FastRequestBoxView: View {
     @State private var localGreenColor: Color = Color(red: 11/255, green: 185/255, blue: 109/255)
     @State private var localRedColor: Color = Color(red: 252/255, green: 55/255, blue: 73/255)
+    @State private var localBlackColor: Color = Color(red: 58/255, green: 58/255, blue: 58/255)
     
     var topTextG: String
     var topTextR: String
@@ -79,13 +80,13 @@ struct FastRequestBoxView: View {
                 }
                 
                 Text(isActive ? topTextG : topTextR)
-                    .font(.system(size: 12, weight: .regular))
+                    .font(.system(size: 12, weight: .semibold))
                     .foregroundColor(isActive ? localGreenColor : localRedColor)
                     .multilineTextAlignment(.leading)
             }
             Text(title)
-                .font(.system(size: Constants.smallScreen ? 11 : 12, weight: .regular))
-                .foregroundColor(.black)
+                .font(.system(size: Constants.smallScreen ? 11 : 12, weight: .medium))
+                .foregroundColor(isActive ? .black : localBlackColor)
                 .multilineTextAlignment(.leading)
         }
         .padding()

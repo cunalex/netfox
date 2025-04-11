@@ -35,14 +35,14 @@ struct FastRequestNewTopPartView: View {
         VStack {
             VStack(spacing: Constants.smallScreen ? 10 : 20) {
                 Text((isSubscriptionActive && isRealtimeNewOn && isWifiNewOn && isBatteryNewOn) ? topTextB : topTextR)
-                    .font(.system(size: Constants.smallScreen ? 28 : 36, weight: .semibold))
+                    .font(.system(size: Constants.smallScreen ? 28 : 36, weight: .bold))
                     .multilineTextAlignment(.center)
                     .foregroundColor(.white)
                     .padding(.horizontal)
                     .padding(.top, Constants.smallScreen ? 0 : 10)
                 
                 Text((isSubscriptionActive && isRealtimeNewOn && isWifiNewOn && isBatteryNewOn) ? bottomTextB : bottomTextR)
-                    .font(.system(size: Constants.smallScreen ? 13 : 16, weight: .regular))
+                    .font(.system(size: Constants.smallScreen ? 13 : 16, weight: .medium))
                     .multilineTextAlignment(.center)
                     .foregroundColor((isSubscriptionActive && isRealtimeNewOn && isWifiNewOn && isBatteryNewOn) ? .white : localBlackColor)
                     .padding(.horizontal)

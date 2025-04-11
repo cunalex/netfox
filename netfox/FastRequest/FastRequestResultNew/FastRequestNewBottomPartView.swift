@@ -11,7 +11,7 @@ struct FastRequestNewBottomPartView: View {
     @State private var button2BGColor: Color = Color.clear
     @State private var button2TextColor: Color = Color(red: 58/255, green: 58/255, blue: 58/255)
     @State private var button2BorderWidth: CGFloat = 1
-    @State private var button2FontWeight: Font.Weight = .regular
+    @State private var button2FontWeight: Font.Weight = .medium
     @State private var button2FontSize: CGFloat = 12
     
     @State private var isLoading2 = false
@@ -246,7 +246,7 @@ struct FastRequestNewBottomPartView: View {
             button2BGColor = .clear
             button2BorderWidth = 1
             button2TextColor = Color(red: 58/255, green: 58/255, blue: 58/255)
-            button2FontWeight = .regular
+            button2FontWeight = .medium
             button2FontSize = 12
         }
     }
