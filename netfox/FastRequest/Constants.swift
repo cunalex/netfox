@@ -51,6 +51,13 @@ public enum EventsTitles: String {
     case specialOffer5T5Settings = "special_offer5_t5_settings"
     case specialOffer5Error = "special_offer5_error"
     
+    case specialOffer5NewShow = "specialOffer5NewShow"
+    case specialOffer5NewButtonTap = "specialOffer5NewButtonTap"
+    case specialOffer5NewButtonLow1Tap = "specialOffer5NewButtonLow1Tap"
+    case specialOffer5NewButtonLow2Tap = "specialOffer5NewButtonLow2Tap"
+    case specialOffer5NewGreenOne = "specialOffer5NewGreenOne"
+    case specialOffer5NewGreenComplete = "specialOffer5NewGreenComplete"
+    
     case scan1Show = "scan1_show"
     case scan1Action = "scan1_action_button"
     case scan1Hide = "scan1_hide"

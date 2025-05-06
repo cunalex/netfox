@@ -45,8 +45,13 @@ public struct FastRequestResultViewNew: View {
                 .protectScreenshot()
                 .onAppear {
                     checkState()
-                    completion?(.specialOffer5Show)
+                    completion?(.specialOffer5NewShow)
                     ScreenShield.shared.protectFromScreenRecording()
+                }
+                .onChange(of: isSubscriptionActive) { newValue in
+                    if newValue {
+                        completion?(.specialOffer5NewGreenOne)
+                    }
                 }
         } else {
             myView()
@@ -64,7 +69,12 @@ public struct FastRequestResultViewNew: View {
                 }
                 .onAppear {
                     checkState()
-                    completion?(.specialOffer5Show)
+                    completion?(.specialOffer5NewShow)
+                }
+                .onChange(of: isSubscriptionActive) { newValue in
+                    if newValue {
+                        completion?(.specialOffer5NewGreenOne)
+                    }
                 }
         }
         
@@ -95,16 +105,22 @@ public struct FastRequestResultViewNew: View {
                                              model: model?.resultNew,
                                              sheetButtonAction: {
                     isSheetPresented = true
+                    completion?(.specialOffer5NewButtonLow1Tap)
                 },
                                              openFeature1Action: {
                     completion?(.feature1Action)
                 },
                                              openFeature2Action: {
                     completion?(.feature2Action)
+                    completion?(.specialOffer5NewButtonLow2Tap)
                 },
                                              openWallViewAction: {
 //                    completion?(nil)
                     showingSheet = true
+                }, topButtonEventAction: {
+                    completion?(.specialOffer5NewButtonTap)
+                }, completeAllEventAction: {
+                    completion?(.specialOffer5NewGreenComplete)
                 })
             }
             .padding()

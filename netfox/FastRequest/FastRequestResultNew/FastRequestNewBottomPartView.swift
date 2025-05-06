@@ -27,6 +27,8 @@ struct FastRequestNewBottomPartView: View {
     let openFeature1Action: () -> Void
     let openFeature2Action: () -> Void
     let openWallViewAction: () -> Void
+    let topButtonEventAction: () -> Void
+    let completeAllEventAction: () -> Void
     
     public var body: some View {
         VStack {
@@ -170,6 +172,7 @@ struct FastRequestNewBottomPartView: View {
     }
     
     private func topButtonActionInternal() {
+        topButtonEventAction()
         startLoading()
     }
     
@@ -208,6 +211,7 @@ struct FastRequestNewBottomPartView: View {
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         isButtonDisabled = false
+                        completeAllEventAction()
                         withAnimation {
                             setupState()
                         }
