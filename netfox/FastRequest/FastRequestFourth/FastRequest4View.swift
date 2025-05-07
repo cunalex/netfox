@@ -35,7 +35,7 @@ public struct FastRequest4View: View {
                 myView()
                     .background(Color(UIColor(red: 243/255, green: 243/255, blue: 247/255, alpha: 1)))
                     .navigationBarHidden(true)
-                    .navigationDestination(isPresented: $showNextScreen) {
+                    .navigationDestination(isPresented: (model?.gap?.orderIndex == nil || (model?.gap?.orderIndex ?? 0) == 0) ? $showNextScreen : .constant(false)) {
                         if self.rScreen == 2 || self.rScreen == 3 {
                             FastRequestResultViewNew(isDisabled: $isDisabled, isSubscriptionActive: $isSubscriptionActive, model: model, currentTariff: currentTariff, completion: completion)
                                 .onAppear {
@@ -54,7 +54,7 @@ public struct FastRequest4View: View {
                         let index = model?.gap?.orderIndex ?? 1
                         if index != 0 {
                             if let obj = model?.gap?.objecs[(model?.gap?.orderIndex ?? 1) - 1] {
-                                InterScreen(showNextScreen: .constant(false), isSubscriptionActive: $isSubscriptionActive, isDisabled: $isDisabled, model: model, currentTariff: currentTariff, scanObject: obj, scanTitle: model?.gap?.title ?? "", secureScreenNumber: model?.gap?.orderIndex ?? 0,
+                                InterScreen(showNextScreen: $showNextScreen, isSubscriptionActive: $isSubscriptionActive, isDisabled: $isDisabled, model: model, currentTariff: currentTariff, scanObject: obj, scanTitle: model?.gap?.title ?? "", secureScreenNumber: model?.gap?.orderIndex ?? 0,
                                             rScreen: self.rScreen ?? 0,
                                             completion: completion)
                             }
@@ -72,7 +72,7 @@ public struct FastRequest4View: View {
                 myView()
                     .background(Color(UIColor(red: 243/255, green: 243/255, blue: 247/255, alpha: 1)))
                     .navigationBarHidden(true)
-                    .navigationDestination(isPresented: $showNextScreen) {
+                    .navigationDestination(isPresented: (model?.gap?.orderIndex == nil || (model?.gap?.orderIndex ?? 0) == 0) ? $showNextScreen : .constant(false)) {
                         if self.rScreen == 2 || self.rScreen == 3 {
                             FastRequestResultViewNew(isDisabled: $isDisabled, isSubscriptionActive: $isSubscriptionActive, model: model, currentTariff: currentTariff, completion: completion)
                                 .onAppear {
@@ -91,7 +91,7 @@ public struct FastRequest4View: View {
                         let index = model?.gap?.orderIndex ?? 1
                         if index != 0 {
                             if let obj = model?.gap?.objecs[(model?.gap?.orderIndex ?? 1) - 1] {
-                                InterScreen(showNextScreen: .constant(false), isSubscriptionActive: $isSubscriptionActive, isDisabled: $isDisabled, model: model, currentTariff: currentTariff, scanObject: obj, scanTitle: model?.gap?.title ?? "", secureScreenNumber: model?.gap?.orderIndex ?? 0,
+                                InterScreen(showNextScreen: $showNextScreen, isSubscriptionActive: $isSubscriptionActive, isDisabled: $isDisabled, model: model, currentTariff: currentTariff, scanObject: obj, scanTitle: model?.gap?.title ?? "", secureScreenNumber: model?.gap?.orderIndex ?? 0,
                                             rScreen: self.rScreen ?? 0,
                                             completion: completion)
                                 .navigationBarBackButtonHidden(true)
