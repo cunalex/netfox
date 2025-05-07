@@ -85,13 +85,13 @@ public struct InterScreen : View {
 //                    FastRequestResultView(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: completion)
 //                        .navigationBarBackButtonHidden(true)
 //                }
-                currentDestinationView
+                destinationView()
             }
         }
     }
     
     @ViewBuilder
-    private var currentDestinationView: some View {
+    private func destinationView() -> some View {
         if rScreen == 2 || rScreen == 3 {
             FastRequestResultViewNew(
                 isDisabled: $isDisabled,
