@@ -116,7 +116,8 @@ public struct FastRequestResultView: View {
                     model: model
                 ) { isTariif in
                     if isTariif {
-                        showingSheet = true
+//                        showingSheet = true
+                        completion?(nil)
                     } else {
                         showSheetView = true
                     }

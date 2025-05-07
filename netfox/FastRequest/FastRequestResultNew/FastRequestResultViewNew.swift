@@ -115,8 +115,8 @@ public struct FastRequestResultViewNew: View {
                     completion?(.specialOffer5NewButtonLow2Tap)
                 },
                                              openWallViewAction: {
-//                    completion?(nil)
-                    showingSheet = true
+                    completion?(nil)
+//                    showingSheet = true
                 }, topButtonEventAction: {
                     completion?(.specialOffer5NewButtonTap)
                 }, completeAllEventAction: {
