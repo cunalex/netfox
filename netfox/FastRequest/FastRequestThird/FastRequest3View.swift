@@ -9,7 +9,7 @@ enum ActiveAlert {
 }
 
 public struct FastRequest3View: View {
-    @State private var showAlert = true
+    @State private var showAlert = false
     @State private var activeAlert: ActiveAlert = .first
     @State var showIntermediateScreen: Bool = false
     @Binding var showNextScreen: Bool
@@ -87,6 +87,8 @@ public struct FastRequest3View: View {
                                 dismissButton: .default(Text("OK"), action: {
                                     completion(.specialOffer3FirstButtonTap)
                                     showAlert = false
+                                    activeAlert = .second
+                                    showAlert = true
                                 })
                             )
                         case .second:
@@ -167,6 +169,8 @@ public struct FastRequest3View: View {
                                 dismissButton: .default(Text("OK"), action: {
                                     completion(.specialOffer3FirstButtonTap)
                                     showAlert = false
+                                    activeAlert = .second
+                                    showAlert = true
                                 })
                             )
                         case .second:
@@ -249,7 +253,6 @@ public struct FastRequest3View: View {
             .padding(.top, 15)
             
             Button(action: {
-                activeAlert = .second
                 showAlert = true
             }) {
                 Text(model?.objectTwo?.dark_blue.btn_title ?? "")
