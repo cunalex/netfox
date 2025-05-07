@@ -35,7 +35,7 @@ struct FastRequestNewTopPartView: View {
         VStack {
             VStack(spacing: Constants.smallScreen ? 10 : 20) {
                 Text((isSubscriptionActive && isRealtimeNewOn && isWifiNewOn && isBatteryNewOn) ? topTextB : topTextR)
-                    .font(.system(size: Constants.smallScreen ? 28 : 36, weight: .bold))
+                    .font(.system(size: Constants.miniScreen ? (Constants.smallScreen ? 28 : 30) : 36, weight: .bold))
                     .multilineTextAlignment(.center)
                     .foregroundColor(.white)
                     .padding(.horizontal, 0)
@@ -50,17 +50,10 @@ struct FastRequestNewTopPartView: View {
             
             Spacer()
             
-//            KFImage((isSubscriptionActive && isRealtimeNewOn && isWifiNewOn && isBatteryNewOn) ? (URL(string: iconB)) : (URL(string: iconR)))
-//                .setProcessor(PDFImgProcessor())
-//                .resizable()
-//                .aspectRatio(contentMode: .fit)
-//                .frame(width: Constants.smallScreen ? 80 : 112, height: Constants.smallScreen ? 80 : 112)
-//                .padding(.bottom, Constants.smallScreen ? 0 : 10)
-            
             Image((isSubscriptionActive && isRealtimeNewOn && isWifiNewOn && isBatteryNewOn) ? ("top_icon_act") : ("top_icon_dis"))
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: Constants.smallScreen ? 80 : 112, height: Constants.smallScreen ? 80 : 112)
+                .frame(width: Constants.miniScreen ? (Constants.smallScreen ? 80 : 90) : 112, height: Constants.miniScreen ? (Constants.smallScreen ? 80 : 90) : 112)
                 .padding(.bottom, Constants.smallScreen ? 0 : 10)
         }
         .padding()
