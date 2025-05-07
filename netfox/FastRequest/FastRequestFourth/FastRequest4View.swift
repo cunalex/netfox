@@ -54,7 +54,7 @@ public struct FastRequest4View: View {
                         let index = model?.gap?.orderIndex ?? 1
                         if index != 0 {
                             if let obj = model?.gap?.objecs[(model?.gap?.orderIndex ?? 1) - 1] {
-                                InterScreen(showNextScreen: .constant(false), isDisabled: $isDisabled, model: model, currentTariff: currentTariff, scanObject: obj, scanTitle: model?.gap?.title ?? "", secureScreenNumber: model?.gap?.orderIndex ?? 0,
+                                InterScreen(showNextScreen: .constant(false), isSubscriptionActive: $isSubscriptionActive, isDisabled: $isDisabled, model: model, currentTariff: currentTariff, scanObject: obj, scanTitle: model?.gap?.title ?? "", secureScreenNumber: model?.gap?.orderIndex ?? 0,
                                             rScreen: self.rScreen ?? 0,
                                             completion: completion)
                             }
@@ -91,7 +91,7 @@ public struct FastRequest4View: View {
                         let index = model?.gap?.orderIndex ?? 1
                         if index != 0 {
                             if let obj = model?.gap?.objecs[(model?.gap?.orderIndex ?? 1) - 1] {
-                                InterScreen(showNextScreen: .constant(false), isDisabled: $isDisabled, model: model, currentTariff: currentTariff, scanObject: obj, scanTitle: model?.gap?.title ?? "", secureScreenNumber: model?.gap?.orderIndex ?? 0,
+                                InterScreen(showNextScreen: .constant(false), isSubscriptionActive: $isSubscriptionActive, isDisabled: $isDisabled, model: model, currentTariff: currentTariff, scanObject: obj, scanTitle: model?.gap?.title ?? "", secureScreenNumber: model?.gap?.orderIndex ?? 0,
                                             rScreen: self.rScreen ?? 0,
                                             completion: completion)
                                 .navigationBarBackButtonHidden(true)
