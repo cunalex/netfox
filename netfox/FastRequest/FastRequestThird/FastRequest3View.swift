@@ -88,7 +88,9 @@ public struct FastRequest3View: View {
                                     completion(.specialOffer3FirstButtonTap)
                                     showAlert = false
                                     activeAlert = .second
-                                    showAlert = true
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                                        showAlert = true
+                                    }
                                 })
                             )
                         case .second:
@@ -170,7 +172,9 @@ public struct FastRequest3View: View {
                                     completion(.specialOffer3FirstButtonTap)
                                     showAlert = false
                                     activeAlert = .second
-                                    showAlert = true
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                                        showAlert = true
+                                    }
                                 })
                             )
                         case .second:
