@@ -60,10 +60,10 @@ public struct FastRequest3View: View {
                         
                     }
                     .navigationDestination(isPresented: $showIntermediateScreen) {
-                        let index = model?.gap?.orderIndex ?? 1
+                        let index = model?.gap?.orderIndex ?? 0
                         if index != 0 {
-                            if let obj = model?.gap?.objecs[(model?.gap?.orderIndex ?? 1) - 1] {
-                                InterScreen(showNextScreen: (model?.gap?.orderIndex == nil || (model?.gap?.orderIndex ?? 0) == 0) ? .constant(false) : $showNextScreen, isSubscriptionActive: $isSubscriptionActive, isDisabled: $isDisabled, model: model, currentTariff: currentTariff, scanObject: obj, scanTitle: model?.gap?.title ?? "", secureScreenNumber: model?.gap?.orderIndex ?? 0,
+                            if let obj = model?.gap?.objecs[index - 1] {
+                                InterScreen(showNextScreen: $showNextScreen, isSubscriptionActive: $isSubscriptionActive, isDisabled: $isDisabled, model: model, currentTariff: currentTariff, scanObject: obj, scanTitle: model?.gap?.title ?? "", secureScreenNumber: model?.gap?.orderIndex ?? 0,
                                             rScreen: self.rScreen ?? 0,
                                             completion: completion)
                                 .navigationBarBackButtonHidden(true)
@@ -142,16 +142,15 @@ public struct FastRequest3View: View {
                         }
                     }
                     .navigationDestination(isPresented: $showIntermediateScreen) {
-                        let index = model?.gap?.orderIndex ?? 1
+                        let index = model?.gap?.orderIndex ?? 0
+                        
                         if index != 0 {
-                            if let obj = model?.gap?.objecs[(model?.gap?.orderIndex ?? 1) - 1] {
-                                let index = model?.gap?.orderIndex ?? 1
-                                if index != 0 {
-                                    InterScreen(showNextScreen: (model?.gap?.orderIndex == nil || (model?.gap?.orderIndex ?? 0) == 0) ? .constant(false) : $showNextScreen, isSubscriptionActive: $isSubscriptionActive, isDisabled: $isDisabled, model: model, currentTariff: currentTariff, scanObject: obj, scanTitle: model?.gap?.title ?? "", secureScreenNumber: model?.gap?.orderIndex ?? 0,
+                            if let obj = model?.gap?.objecs[index - 1] {
+
+                                    InterScreen(showNextScreen: $showNextScreen, isSubscriptionActive: $isSubscriptionActive, isDisabled: $isDisabled, model: model, currentTariff: currentTariff, scanObject: obj, scanTitle: model?.gap?.title ?? "", secureScreenNumber: model?.gap?.orderIndex ?? 0,
                                                 rScreen: self.rScreen ?? 0,
                                                 completion: completion)
                                     .navigationBarBackButtonHidden(true)
-                                }
                             }
                         }
                         
