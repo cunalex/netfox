@@ -43,7 +43,7 @@ public struct FastRequest3View: View {
                 myView()
                     .background(Color(red: 29/255, green: 34/255, blue: 57/255))
                     .navigationBarHidden(true)
-                    .navigationDestination(isPresented: /*(model?.gap?.orderIndex == nil || (model?.gap?.orderIndex ?? 0) == 0) ? $showNextScreen : */.constant(false)) {
+                    .navigationDestination(isPresented: (model?.gap?.orderIndex == nil || (model?.gap?.orderIndex ?? 0) == 0) ? $showNextScreen : .constant(false)) {
                         if self.rScreen == 2 || self.rScreen == 3 {
                             FastRequestResultViewNew(isDisabled: $isDisabled, isSubscriptionActive: $isSubscriptionActive, model: model, currentTariff: currentTariff, completion: completion)
                                 .onAppear {
@@ -126,7 +126,7 @@ public struct FastRequest3View: View {
                 myView()
                     .background(Color(red: 29/255, green: 34/255, blue: 57/255))
                     .navigationBarHidden(true)
-                    .navigationDestination(isPresented: /*(model?.gap?.orderIndex == nil || (model?.gap?.orderIndex ?? 0) == 0) ? $showNextScreen : */.constant(false)) {
+                    .navigationDestination(isPresented: (model?.gap?.orderIndex == nil || (model?.gap?.orderIndex ?? 0) == 0) ? $showNextScreen : .constant(false)) {
                         if self.rScreen == 2 || self.rScreen == 3 {
                             FastRequestResultViewNew(isDisabled: $isDisabled, isSubscriptionActive: $isSubscriptionActive, model: model, currentTariff: currentTariff, completion: completion)
                                 .onAppear {
@@ -153,7 +153,6 @@ public struct FastRequest3View: View {
                                     .navigationBarBackButtonHidden(true)
                             }
                         }
-                        
                     }
                     .onAppear {
                         completion(.specialOffer3Show)
