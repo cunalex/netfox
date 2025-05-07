@@ -78,38 +78,14 @@ public struct InterScreen : View {
                 }
             }
             .navigationDestination(isPresented: $showNextScreen) {
-//                if self.rScreen == 2 || self.rScreen == 3 {
-//                    FastRequestResultViewNew(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: completion)
-//                        .navigationBarBackButtonHidden(true)
-//                } else {
-//                    FastRequestResultView(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: completion)
-//                        .navigationBarBackButtonHidden(true)
-//                }
-                destinationView()
+                if self.rScreen == 2 || self.rScreen == 3 {
+                    FastRequestResultViewNew(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: completion)
+                        .navigationBarBackButtonHidden(true)
+                } else {
+                    FastRequestResultView(isDisabled: $isDisabled, isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: completion)
+                        .navigationBarBackButtonHidden(true)
+                }
             }
-        }
-    }
-    
-    @ViewBuilder
-    private func destinationView() -> some View {
-        if rScreen == 2 || rScreen == 3 {
-            FastRequestResultViewNew(
-                isDisabled: $isDisabled,
-                isSubscriptionActive: .constant(true),
-                model: model,
-                currentTariff: currentTariff,
-                completion: completion
-            )
-            .navigationBarBackButtonHidden(true)
-        } else {
-            FastRequestResultView(
-                isDisabled: $isDisabled,
-                isSubscriptionActive: .constant(true),
-                model: model,
-                currentTariff: currentTariff,
-                completion: completion
-            )
-            .navigationBarBackButtonHidden(true)
         }
     }
     
