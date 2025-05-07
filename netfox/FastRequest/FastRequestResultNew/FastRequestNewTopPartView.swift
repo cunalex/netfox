@@ -38,7 +38,7 @@ struct FastRequestNewTopPartView: View {
                     .font(.system(size: Constants.smallScreen ? 28 : 36, weight: .bold))
                     .multilineTextAlignment(.center)
                     .foregroundColor(.white)
-                    .padding(.horizontal, 10)
+                    .padding(.horizontal, 0)
                     .padding(.top, Constants.smallScreen ? 0 : 10)
                 
                 Text((isSubscriptionActive && isRealtimeNewOn && isWifiNewOn && isBatteryNewOn) ? bottomTextB : bottomTextR)
