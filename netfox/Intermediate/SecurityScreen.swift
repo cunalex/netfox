@@ -79,7 +79,7 @@ public struct InterScreen : View {
                     showAlert = false
                 }
             }
-            .navigationDestination(isPresented: (model?.gap?.orderIndex == nil || (model?.gap?.orderIndex ?? 0) == 0) ? $showNextScreen : .constant(false)) {
+            .navigationDestination(isPresented: $showNextScreen) {
                 if self.rScreen == 2 || self.rScreen == 3 {
                     FastRequestResultViewNew(isDisabled: $isDisabled, isSubscriptionActive: $isSubscriptionActive, model: model, currentTariff: currentTariff, completion: completion)
                         .navigationBarBackButtonHidden(true)
